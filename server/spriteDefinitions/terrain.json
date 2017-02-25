@@ -1,37 +1,46 @@
 {
   "1": {
+    "name": "Esquina superior izq.",
     "day": "0x0",
-    "night": "0x10"
+    "night": "0x9"
   },
   "2": {
+    "name": "Esquina superior der.",
     "day": "0x2",
-    "night": "0x12"
-  },
-  "3": {
-    "day": "2x0",
-    "night": "2x10"
-  },
-  "4": {
-    "day": "2x2",
-    "night": "2x12"
-  },
-  "u": {
-    "day": "0x1",
     "night": "0x11"
   },
-  "l": {
-    "day": "1x0",
-    "night": "1x10"
+  "3": {
+    "name": "Esquina inferior izq.",
+    "day": "2x0",
+    "night": "2x9"
   },
-  "d": {
-    "day": "2x1",
+  "4": {
+    "name": "Esquina inferior der.",
+    "day": "2x2",
     "night": "2x11"
   },
+  "u": {
+    "name": "Parte superior de playa",
+    "day": "0x1",
+    "night": "0x10"
+  },
+  "l": {
+    "name": "Parte izq. de playa",
+    "day": "1x0",
+    "night": "1x9"
+  },
+  "d": {
+    "name": "Parte inferior de playa",
+    "day": "2x1",
+    "night": "2x10"
+  },
   "r": {
+    "name": "Parte der. de playa",
     "day": "1x2",
-    "night": "1x12"
+    "night": "1x11"
   },
   "g": {
+    "name": "Hierba",
     "day": "1x6",
     "night": "1x7"
   }
