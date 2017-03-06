@@ -26,6 +26,7 @@
     "ctx": true,
     "fps": true,
     "gameObjects": true,
+    "initCanvas": true,
     "initGame": true,
     "inputAction": true,
     "loadConfig": true,

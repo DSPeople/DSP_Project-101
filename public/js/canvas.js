@@ -1,10 +1,13 @@
-/* exported ctx */
+/* exported ctx, canvas, initCanvas */
+var ctx, canvas;
 
-// Create the canvas
-var canvas = document.createElement("canvas");
-var ctx = canvas.getContext("2d");
-canvas.width = 1280;
-canvas.height = 720;
-// canvas.width = window.innerWidth;
-// canvas.height = window.innerHeight;
-document.body.appendChild(canvas);
+function initCanvas(resolution) {
+  // Create the canvas
+  canvas = document.createElement("canvas");
+  ctx = canvas.getContext("2d");
+  canvas.width = resolution.width;
+  canvas.height = resolution.height;
+  // canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+}

@@ -1,13 +1,20 @@
 /* exported CONFIG, EXTRA_RESOURCES, MAPS, SPRITE_DEFINITIONS, TERRAIN_TILES, player, gameObjects, modifier, controls */
-var CONFIG, EXTRA_RESOURCES, MAPS, SPRITE_DEFINITIONS, TERRAIN_TILES = {}, player, gameObjects, modifier, controls;
+var CONFIG, EXTRA_RESOURCES, MAPS, SPRITE_DEFINITIONS, TERRAIN_TILES = {}, player, gameObjects, modifier, controls, playerOriginalX, playerOriginalY;
 
 // Carga de la configuracion
 loadConfig().then(function(configFromServer) {
   CONFIG = configFromServer;
 
+  // Bindea los controles
   if (CONFIG.controls) {
     controls = utils.controlsBinder(CONFIG.controls);
   }
+
+  playerOriginalX = CONFIG.resolution.width / 2;
+  playerOriginalY = CONFIG.resolution.height / 2;
+
+  // Una vez se ha cargado la configuracion, se crea el canvas
+  initCanvas(CONFIG.resolution);
 
   loadExtraResources().then(function(extraResourcesFromServer) {
     EXTRA_RESOURCES = extraResourcesFromServer;
