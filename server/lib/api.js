@@ -1,5 +1,6 @@
 var express = require("express");
 var utils = require('./utils');
+var parser = require('./parser');
 var router = new express.Router();
 
 // Devuelve la version de la aplicacion
@@ -17,7 +18,7 @@ router.get("/configLoader", function(req, res) {
     // Se hace un foreach sobre el objeto devuelto al leer todos los ficheros de un directorio
     utils.objForEach(content, function(value, key) {
       // Se rellena el objeto que va a devolver el servicio, formateando su contenido
-      configObject[key.split(".")[0]] = _configToObject(value);
+      configObject[key.split(".")[0]] = parser.configToObject(value);
     });
 
     res.send(configObject);
@@ -25,27 +26,6 @@ router.get("/configLoader", function(req, res) {
     res.send(err);
     throw err;
   });
-
-  // Función que se utiliza para formatear el contenido de un fichero de configuracion
-  function _configToObject(config) {
-    var object = {}, lines = config.split("\n");
-
-    for (var i = 0; i < lines.length; i++) {
-      if (lines[i]) {
-        var property = lines[i].split("=")[0];
-        var value = lines[i].split("=")[1];
-
-        // Si value tiene comas, se convierte a array
-        if (value.split(",").length > 1) {
-          value = value.split(",");
-        }
-
-        object[property] = value;
-      }
-    }
-
-    return object;
-  }
 });
 
 // Devuelve un objeto que contiene todos los mapas cargados
@@ -56,7 +36,7 @@ router.get("/mapsLoader", function(req, res) {
     // Se hace un foreach sobre el objeto devuelto al leer todos los ficheros de un directorio
     utils.objForEach(content, function(value, key) {
       // Se rellena el objeto que va a devolver el servicio, formateando su contenido
-      mapsObject[key.split(".")[0]] = _mapToArray(value);
+      mapsObject[key.split(".")[0]] = parser.mapToArray(value);
     });
 
     res.send(mapsObject);
@@ -64,22 +44,6 @@ router.get("/mapsLoader", function(req, res) {
     res.send(err);
     throw err;
   });
-
-  // Función que se utiliza para formatear el contenido de un fichero de configuracion
-  function _mapToArray(map) {
-    var array = map.split("\n");
-
-    for (var i = 0; i < array.length; i++) {
-      array[i] = array[i].split(" ").join("");
-
-      if (array[i].split("").length <= 1) {
-        array.splice(i, 1);
-        i--;
-      }
-    }
-
-    return array;
-  }
 });
 
 // Devuelve un objeto que representa la definicion de los sprites
@@ -90,7 +54,7 @@ router.get("/spriteDefinitionsLoader", function(req, res) {
     // Se hace un foreach sobre el objeto devuelto al leer todos los ficheros de un directorio
     utils.objForEach(content, function(value, key) {
       // Se rellena el objeto que va a devolver el servicio, formateando su contenido
-      spriteDefinition[key.split(".")[0]] = _jsonToSpriteDefinition(value);
+      spriteDefinition[key.split(".")[0]] = parser.jsonParse(value);
     });
 
     res.send(spriteDefinition);
@@ -98,10 +62,30 @@ router.get("/spriteDefinitionsLoader", function(req, res) {
     res.send(err);
     throw err;
   });
+});
 
-  function _jsonToSpriteDefinition(json) {
-    return JSON.parse(json);
-  }
+// Devuelve un objeto que representa la definicion de los sprites
+router.get("/extraResourcesLoader", function(req, res) {
+  var extraResources = {};
+
+  utils.readFilesFromFolder('extraResources/', function(content) {
+    // Se hace un foreach sobre el objeto devuelto al leer todos los ficheros de un directorio
+    utils.objForEach(content, function(value, key) {
+      // Se rellena el objeto que va a devolver el servicio, formateando su contenido
+      // comprobando su extensión
+
+      if (key.split(".")[1] === "json") {
+        extraResources[key.split(".")[0]] = parser.jsonParse(value);
+      }/* else if (key.split(".")[1] === "conf") {                              // NOTE: En caso de existir otro tipo de fichero "extra"
+        extraResources[key.split(".")[0]] = parser.configToObject(value);
+      }*/
+    });
+
+    res.send(extraResources);
+  }, function(err) {
+    res.send(err);
+    throw err;
+  });
 });
 
 module.exports = router;
