@@ -5,8 +5,8 @@ function update(modifier) {
 
   var oldY, oldX, limit;
 
-  // Se comprueba lo que el usuario está pulsando
-  // El jugador está pulsando W
+  // Se comprueba las teclas que pulsa el jugador
+  // El jugador está pulsando up
   if (inputAction['up']) {
     oldY = player.y;
     player.y -= player.speed * modifier;
@@ -18,7 +18,7 @@ function update(modifier) {
     }
   }
 
-  // El jugador está pulsando A
+  // El jugador está pulsando left
   if (inputAction['left']) {
     oldX = player.x;
     player.x -= player.speed * modifier;
@@ -30,7 +30,7 @@ function update(modifier) {
     }
   }
 
-  // El jugador está pulsando S
+  // El jugador está pulsando down
   if (inputAction['down']) {
     oldY = player.y;
     player.y += player.speed * modifier;
@@ -43,7 +43,7 @@ function update(modifier) {
     }
   }
 
-  // El jugador está pulsando D
+  // El jugador está pulsando right
   if (inputAction['right']) {
     oldX = player.x;
     player.x += player.speed * modifier;
@@ -54,6 +54,11 @@ function update(modifier) {
     } else {
       player.x = _checkCollisions(player, gameObjects, player.x, oldX);
     }
+  }
+
+  // El jugador está pulsando action1
+  if (inputAction['action1']) {
+    //
   }
 }
 

@@ -13,17 +13,21 @@ function render() {
   ctx.fillRect(player.x, player.y, player.width, player.height);
 
   // Se crea el HUD
-  ctx.fillStyle = "rgb(250, 250, 250)";
-  ctx.font = "18px Helvetica";
-  ctx.textAlign = "left";
-  ctx.textBaseline = "top";
+  lowerMenuCtx.fillStyle = "rgb(255, 215, 0)";
+  lowerMenuCtx.strokeStyle = "black";
+  lowerMenuCtx.font = "20pt Helvetica";
+  lowerMenuCtx.textBaseline = "top";
+
+  // Se inserta en el canvas del menu inferior la imagen cargada
+  lowerMenuCtx.drawImage(lowerMenuImage, 0, 0);
 
   // Gold
-  ctx.fillText(`Gold: ${player.gold}`, 32, 32);
+  lowerMenuCtx.fillText(`G: ${player.gold}`, 20, 43);
+  lowerMenuCtx.strokeText(`G: ${player.gold}`, 20, 43);
 
   // FPS
-  ctx.textBaseline = "bottom";
-  ctx.fillText(`FPS: ${fps}`, 32, 32);
+  lowerMenuCtx.fillStyle = "black";
+  lowerMenuCtx.fillText(`FPS: ${fps}`, 20, 7);
 
   // Se crean los gameObjects
   ctx.fillStyle = "#0F0";
