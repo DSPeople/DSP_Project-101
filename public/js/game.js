@@ -32,7 +32,6 @@ loadConfig().then(function(configFromServer) {
     lowerMenuImage = image;
   };
 
-
   loadExtraResources().then(function(extraResourcesFromServer) {
     EXTRA_RESOURCES = extraResourcesFromServer;
 
@@ -46,23 +45,27 @@ loadConfig().then(function(configFromServer) {
         loadSprite("../assets/terrain.png", Number(CONFIG.sprites.pixelPerSprite)).then(function(data) {
           TERRAIN_TILES[CURRENT_TERRAIN_SPRITE] = data;
 
-          modifier = "day";
+          // Se hace la llamada al back que permite que se abra la ventana
+          openAppWindow(CONFIG.resolution.width, CONFIG.resolution.height + CONFIG.resolution.lowerMenuHeight).then(function() {
 
-          // Player
-          // playerWidth, playerHeight, playerX, playerY, playerGold, playerSpeed
-          player = new DSP_Player(40, 80, playerOriginalX, playerOriginalY, 0, 500);
+            modifier = "day";
 
-          // Objetos
-          // objectWidth, objectHeight, objectX, objectY, collisionable, collectible
-          gameObjects = [
-            new DSP_StaticObject(200, 300, 200, 200, true, false),
-            new DSP_StaticObject(100, 100, 500, 600, false, true),
-            new DSP_StaticObject(100, 100, 800, 600, false, false),
-            new DSP_StaticObject(600, 100, 500, 150, true, false)
-          ];
+            // Player
+            // playerWidth, playerHeight, playerX, playerY, playerGold, playerSpeed
+            player = new DSP_Player(40, 80, playerOriginalX, playerOriginalY, 0, 500);
 
-          // Cuando ya ha cargado todo se inicializa el juego
-          initGame();
+            // Objetos
+            // objectWidth, objectHeight, objectX, objectY, collisionable, collectible
+            gameObjects = [
+              new DSP_StaticObject(200, 300, 200, 200, true, false),
+              new DSP_StaticObject(100, 100, 500, 600, false, true),
+              new DSP_StaticObject(100, 100, 800, 600, false, false),
+              new DSP_StaticObject(600, 100, 500, 150, true, false)
+            ];
+
+            // Cuando ya ha cargado todo se inicializa el juego
+            initGame();
+          });
         });
       });
     });

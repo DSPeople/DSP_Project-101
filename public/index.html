@@ -5,6 +5,8 @@
     <title>Project 101</title>
   </head>
   <body>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
     <!-- Librerias externas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/q.js/1.4.1/q.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -19,7 +21,6 @@
     <!-- JS -->
     <script src="js/canvas.js"></script>
     <script>
-      // Se decide donde aparece el jugador
       var CURRENT_MAP = 'firstMap';
       var CURRENT_TERRAIN_SPRITE = 'terrain';
     </script>
@@ -27,6 +28,7 @@
     <script src="js/loaders/spriteLoader.js"></script>
     <script src="js/loaders/mapsLoader.js"></script>
     <script src="js/loaders/extraResourcesLoader.js"></script>
+    <script src="js/loaders/windowOpener.js"></script>
     <script src="js/game.js"></script>
     <script src="js/controlsManager.js"></script>
     <script src="js/reset.js"></script>
@@ -35,6 +37,9 @@
     <script src="js/render.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/main.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
+    
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <div class="canvasContainer">

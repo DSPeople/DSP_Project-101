@@ -38,6 +38,7 @@
     "lowerMenuCtx": true,
     "lowerMenuImage": true,
     "modifier": true,
+    "openAppWindow": true,
     "player": true,
     "playerOriginalX": true,
     "playerOriginalY": true,

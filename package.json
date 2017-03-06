@@ -6,5 +6,8 @@
   "author": "Raúl 'DSPSaïx' Torres",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "electron": "^1.6.1"
   }
 }
