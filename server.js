@@ -19,7 +19,7 @@
   httpApp.use("/api", api);
 
   electronApp.on('ready', function() {
-    var win = new BrowserWindow({ width: 600, height: 400, show: true, resizable: false });
+    var win = new BrowserWindow({ x: 300, y: 150, width: 600, height: 400, show: true, resizable: false });
     win.on('close', function () { win = null });
     win.loadURL("http://localhost:3000");
     globalObjects.saveWindowApp(win);
